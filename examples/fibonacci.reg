@@ -1,0 +1,18 @@
+# computes fib(10) into r0, iteratively
+main:
+    r2 = 10             # n
+    r0 = 0              # fib(i)
+    r1 = 1              # fib(i+1)
+fib_loop:
+    if r2 == 0 goto fib_end
+
+    r3 = r0             # r3 = fib(i)
+    r3 += r1            # r3 = fib(i) + fib(i+1)
+
+    r0 = r1             # fib(i)   = fib(i+1)
+    r1 = r3             # fib(i+1) = r3
+
+    --r2                # --n
+    goto fib_loop
+fib_end:
+    stop

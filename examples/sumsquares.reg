@@ -1,0 +1,27 @@
+# computes sum(i^2, i=1..10) into r0
+main:
+    r1 = 42             # sentinel: must still be 42 after the call
+    r2 = 10             # n = 10
+    call sumsquares
+    stop
+
+# input: r2 = n, output: r0 = sum(i^2, i=1..n)
+# r1 is callee-saved -- must be preserved across this call
+sumsquares:
+    push r1
+
+    r0 = 0
+    r1 = 1
+sumsquares_loop:
+    if r1 > r2 goto sumsquares_end
+
+    r3 = r1             # r3 = i
+    r3 *= r1            # r3 = i * i
+    r0 += r3            # sum += i*i
+
+    ++r1                # ++i
+    goto sumsquares_loop
+
+sumsquares_end:
+    pop r1
+    return

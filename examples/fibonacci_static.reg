@@ -1,0 +1,23 @@
+# computes fib(20) into r0, iteratively, holding the running pair
+# of fibonacci values in static data instead of registers
+static:
+    fib0 = 0            # fib(i)
+    fib1 = 1            # fib(i+1)
+
+main:
+    r2 = 20             # n
+fib_loop:
+    if r2 == 0 goto fib_end
+
+    r0 = *fib0          # r0 = fib(i)
+    r1 = *fib1          # r1 = fib(i+1)
+    r0 += r1            # r0 = fib(i) + fib(i+1)
+
+    *fib0 = r1          # fib0 = fib(i+1)
+    *fib1 = r0          # fib1 = fib(i) + fib(i+1)
+
+    --r2                # --n
+    goto fib_loop
+fib_end:
+    r0 = *fib0          # result: fib(20)
+    stop
