@@ -5,6 +5,8 @@ reg is a small 64-bit register machine. It has two programs:
 - `regas` assembles a `.reg` source file into a binary.
 - `reg` runs a binary and writes the final machine state to a text file.
 
+Essentially, `reg` is the natural progression from [`pez`](https://github.com/joeldbaptista/pez).
+
 ## Build
 
 	make
